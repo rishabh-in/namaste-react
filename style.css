@@ -25,9 +25,15 @@ body {
   padding: 10px;
 }
 
-.search-container {
+.action-container {
   padding: 10px;
+  display: flex;
 }
+
+.action-container > div {
+  margin: 15px;
+}
+
 
 .res-container {
   padding: 20px;
