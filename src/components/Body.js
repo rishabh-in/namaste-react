@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import loopData from '../../utils/MOCK_DATA.json'
 import RestaurantCard from './RestaurantCard';
 import Loading from './Loading';
 import Shimmer from './Shimmer';
+import { Swiggy_Url } from '../../utils/constant';
 
 const BodyContainer = () => {
   let [restaurantsData, setRestaurantsData] = useState([]);
@@ -12,8 +14,13 @@ const BodyContainer = () => {
 
   useEffect(() => {
     //make api call
+
     fetchData().then((res) => setLoading(false))
-    
+
+    //make swiggy apicall
+    // let resData = await fetchData();
+    // console.log(resData)
+    // setRestaurantsData(resData);
   }, []);
   
 
@@ -24,6 +31,11 @@ const BodyContainer = () => {
         resolve();
       }, 3000);
     })
+
+    // let response = await fetch(Swiggy_Url);
+    // let data = await response.json();
+    // let parsedData = data?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+    // return parsedData;
   }
 
 
@@ -44,7 +56,7 @@ const BodyContainer = () => {
       )
     )
   })
-
+  console.log(restaurantsData)
   return restaurantsData.length === 0 ? <Shimmer /> : (
     <div className='body-container'>
       <div className='action-container'>
@@ -64,7 +76,7 @@ const BodyContainer = () => {
       <div className='parent-res-container'>
         <div className='res-container'>
           {filterData && filterData.length > 0 && filterData.map((res, index) => (
-            <RestaurantCard key={res.info.id} resData={res.info} />
+             <RestaurantCard key={res.info.id} resData={res.info} />
           ))}
         </div>
       </div>
