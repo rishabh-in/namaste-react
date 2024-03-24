@@ -5,7 +5,7 @@ import {createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 import {BodyContainer, About, Contact, Error, RestaurantDetails } from '../utils/pageListAsync';
 const App = () => {
   return (
-    <div className='app'>
+    <div className='box-border font-Nunito'>
       <Header />
       <Outlet />
     </div>
