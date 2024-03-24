@@ -1,14 +1,16 @@
-import React, { Suspense, lazy } from 'react';
+import React, { StrictMode, Suspense, lazy } from 'react';
 import ReactDom from 'react-dom/client';
 import Header from './components/Header';
 import {createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 import {BodyContainer, About, Contact, Error, RestaurantDetails } from '../utils/pageListAsync';
 const App = () => {
   return (
-    <div className='box-border font-Nunito'>
-      <Header />
-      <Outlet />
-    </div>
+    <StrictMode>
+      <div className='box-border font-Nunito'>
+        <Header />
+        <Outlet />
+      </div>
+    </StrictMode>
   )
 }
 

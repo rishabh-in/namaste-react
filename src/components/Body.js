@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import loopData from '../../utils/MOCK_DATA.json'
-import RestaurantCard from './RestaurantCard';
+import RestaurantCard, { topRatedRestaurants } from './RestaurantCard';
 import Loading from './Loading';
 import Shimmer from './Shimmer';
 import { Swiggy_Url } from '../../utils/constant';
@@ -60,6 +60,9 @@ const BodyContainer = () => {
     )
   })
 
+
+  const TopRatedRestaurantComponent = topRatedRestaurants(RestaurantCard);
+
   if(!online) {
     return (<h1>Looks like you are offline. Please check you internet connection</h1>)
   }
@@ -84,7 +87,12 @@ const BodyContainer = () => {
       <div className='parent-res-container'>
         <div className='res-container'>
           {filterData && filterData.length > 0 && filterData.map((res, index) => (
-             <RestaurantCard key={res.info.id} resData={res.info} />
+            <Fragment>
+              {res.info.avgRating > 4.2 ? 
+                <TopRatedRestaurantComponent key={res.info.id} resData={res.info} /> : 
+                <RestaurantCard key={res.info.id} resData={res.info} />
+              }
+            </Fragment>
           ))}
         </div>
       </div>

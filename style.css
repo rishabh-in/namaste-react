@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Madimi+One&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
-
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 * {
   box-sizing: border-box;
 }
@@ -33,6 +35,11 @@ body {
   height: 100%;
   background-color: #dfe4ea;
   mix-blend-mode: multiply
+}
+
+.nav-items {
+  display: flex;
+  align-items: center;
 }
 
 .nav-items > ul {
@@ -130,9 +137,12 @@ body {
   /* border: 2px solid blue; */
   flex-wrap: wrap;
 }
+.res-container > div {
+  width: 25%
+}
 
 .res-card {
-  width: calc(25% - 10px);
+  width: calc(100% - 10px);
   margin: 5px;
   padding: 20px;
   height: 400px;
@@ -173,7 +183,9 @@ body {
   background-color: transparent;
   justify-content: space-between;
   overflow: hidden;
-  border: 2px solid black;
+  border-radius: 20px;
+  background-color: rgb(212, 221, 163);
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 }
 
 .main-res-info::before {

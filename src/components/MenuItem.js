@@ -1,21 +1,24 @@
+import { Fragment } from "react"
 import { CDN_URL } from "../../utils/constant"
 
 const MenuItem = (props) => {
-  const {name, price, description, imageId} = props.item
-  console.log(props.item)
+  const {name, price, description, imageId} = props?.item?.card?.info
   return (
-    <div className="res-menu-card">
-      <div className="menu-item-details">
-        <div className="item-info">
-          <div className="item-title">{name}</div>
-          <div className="item-price">{"Price " + price / 100 + "Rs"}</div>
-          <div className="item-description">{description}</div>
+    <Fragment>
+      <div className="flex justify-between px-4 mb-8 border-b-2">
+        <div className="w-[80%]">
+          <p className="font-bold text-xl">{name}</p>
+          <p>{description}</p>
+          <p>Price: {price / 100} Rs</p>
         </div>
-        <div className="item-img-container">
-          <img className="item-img" src={CDN_URL + imageId} />
+        <div className="relative w-[20%] p-2">
+          <div className="absolute bg-white text-black rounded-md p-1">
+            <button>Add +</button>
+          </div>
+          <img className="rounded-md" src={CDN_URL + imageId}/>
         </div>
       </div>
-    </div>
+    </Fragment>
   )
 }
 
