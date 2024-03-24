@@ -5,6 +5,7 @@ import RestaurantCard from './RestaurantCard';
 import Loading from './Loading';
 import Shimmer from './Shimmer';
 import { Swiggy_Url } from '../../utils/constant';
+import useInternetStatusFinder from '../../utils/useInternetStatusFinder';
 
 const BodyContainer = () => {
   let [restaurantsData, setRestaurantsData] = useState([]);
@@ -12,30 +13,32 @@ const BodyContainer = () => {
   let [search, setSearch] = useState("");
   let [loading, setLoading] = useState(true)
 
+    // check internet connection
+    const online = useInternetStatusFinder()
+
   useEffect(() => {
     //make api call
 
-    fetchData().then((res) => setLoading(false))
+    // fetchData().then((res) => setLoading(false))
 
     //make swiggy apicall
-    // let resData = await fetchData();
-    // console.log(resData)
-    // setRestaurantsData(resData);
+    fetchData()
+    
   }, []);
   
 
-  const fetchData = () => {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        setRestaurantsData(loopData)
-        resolve();
-      }, 3000);
-    })
+  const fetchData = async () => {
+    // return new Promise((resolve, reject) => {
+    //   setTimeout(() => {
+    //     setRestaurantsData(loopData)
+    //     resolve();
+    //   }, 3000);
+    // })
 
-    // let response = await fetch(Swiggy_Url);
-    // let data = await response.json();
-    // let parsedData = data?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
-    // return parsedData;
+    let response = await fetch(Swiggy_Url);
+    let data = await response.json();
+    let parsedData = data?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+    setRestaurantsData(parsedData);
   }
 
 
@@ -48,7 +51,7 @@ const BodyContainer = () => {
     setSearch(e.target.value)
   }
 
-  let filterData = restaurantsData.filter((res) => {
+  let filterData = restaurantsData.length > 0 && restaurantsData.filter((res) => {
     return (
       (
         (!isChecked || (isChecked && res.info.avgRating > 4.5)) && 
@@ -56,6 +59,11 @@ const BodyContainer = () => {
       )
     )
   })
+
+  if(!online) {
+    return (<h1>Looks like you are offline. Please check you internet connection</h1>)
+  }
+  
   console.log(restaurantsData)
   return restaurantsData.length === 0 ? <Shimmer /> : (
     <div className='body-container'>

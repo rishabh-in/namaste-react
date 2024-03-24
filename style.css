@@ -159,36 +159,109 @@ body {
 /* Restaurants Details page */
 .parent-res-detail-container {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
 
 /* Restaurant info styling */
 .main-res-info {
-  width: 40%;
+  position: relative;
+  width: 50%;
   padding: 10px;
   display: flex;
+  background-color: transparent;
   justify-content: space-between;
+  overflow: hidden;
+  border: 2px solid black;
 }
 
-.res-details {
-  padding: 0px;
-  margin: 0px;
+.main-res-info::before {
+  content: '';
+  position: absolute;
+  top: 240px;
+  left: -200px;
+  width: 150%;
+  height: 200%;
+  transform: rotate(10deg);
+  background-color: #ced6e0;
+  transition: all 0.8s ease;
+  z-index: -1;
+}
+
+.main-res-info:hover::before {
+  top: -28%;
+  left: -8%;
 }
 
 .main-res-rating {
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 1px solid black;
 }
 
-.main-res-image {
+.res-menu-container {
+  width: 50%;
+  margin-top: 20px;
+}
+
+.res-menu-card  {
+  position: relative;
   width: 100%;
-  height: 100%;
+  height: 150px;
+  margin: 5px 0px;
+  background: transparent;
+  border: 1px solid black;
   overflow: hidden;
+  z-index: 1;
+} 
+
+.res-menu-card::before {
+  content: '';
+  position: absolute;
+  top: 250px;
+  left: 250px;
+  width: 200%;
+  height: 200%;
+  transform: rotate(-10deg);
+  background: #9AECDB;
+  transition: all 0.6s ease;
+  z-index: -1;
 }
 
+.res-menu-card:hover::before {
+  top: -25%;
+  left: -25%;
+}
+
+.menu-item-details {
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.item-info {
+  width: 80%;
+}
+
+.item-img-container {
+  display: flex;
+  width: 20%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.item-img {
+  width: 100px;
+  height: 100px;
+}
+
+.menu-item-details > div {
+  font-size: 18px;
+  font-weight: 30px;
+  margin: 10px 0px;
+}
 
 /* Loading style */
 .loading-container {
@@ -247,4 +320,15 @@ body {
   100% {
       background-position: -200% 0;
   }
+}
+
+.offline {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: #636e72;
 }

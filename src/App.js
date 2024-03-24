@@ -1,12 +1,8 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import ReactDom from 'react-dom/client';
 import Header from './components/Header';
-import BodyContainer from './components/Body';
-import About from './components/About';
-import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
-import Contact from './components/Contact';
-import RestaurantDetails from './components/RestaurantDetails';
-import Error from './components/Error';
+import {createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
+import {BodyContainer, About, Contact, Error, RestaurantDetails } from '../utils/pageListAsync';
 const App = () => {
   return (
     <div className='app'>

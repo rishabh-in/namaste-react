@@ -1,33 +1,23 @@
-import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { CDN_URL, Swiggy_Menu_Item_Url } from "../../utils/constant";
 import Shimmer from "./Shimmer";
+import MenuItem from "./MenuItem";
+import useFetchRestaurantMenu from "../../utils/useFetchRestaurantMenu";
 
 const RestaurantDetails = () => {
   const {id} = useParams();
-  const [restaurantDetails, setRestaurantsDetails] = useState(null);
-  useEffect(() => {
-    fetchRestaurantMenuItems();
-  }, []);
-
-  const fetchRestaurantMenuItems = async() => {
-    const response = await fetch(Swiggy_Menu_Item_Url + id);
-    const json = await response.json();
-    setRestaurantsDetails(json.data);    
-  }
+  let restaurantDetails = useFetchRestaurantMenu(id);
 
   if(!restaurantDetails) return (<Shimmer />)
 
-  console.log(restaurantDetails)
   const {name, avgRating, cuisines, sla, cloudinaryImageId, locality, totalRatingsString} = restaurantDetails.cards[0]?.card?.card?.info;
   const menuItems = restaurantDetails?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card?.itemCards;
-  console.log(name, avgRating, cuisines, sla, cloudinaryImageId, menuItems);
+  console.log(restaurantDetails, menuItems)
 
   return(
     <div className="parent-res-detail-container">
       <div className="main-res-info">
         <div className="res-details">
-          <h3>{name}</h3>
+          <h2>{name}</h2>
           <p>{cuisines.join(", ")}</p>
           <p>{locality}</p>
         </div>
@@ -35,7 +25,12 @@ const RestaurantDetails = () => {
           <h4>{avgRating + "⭐"}</h4>
           <p>{totalRatingsString}</p>
         </div>
-        <img className="main-res-image" src={CDN_URL + cloudinaryImageId} />
+      </div>
+      {/* Menu Items */}
+      <div className="res-menu-container">
+        {menuItems && menuItems.length > 0 && menuItems.map((item) => (
+          <MenuItem key={item.id} item={item.card.info} />
+        ))}
       </div>
     </div>
   )
