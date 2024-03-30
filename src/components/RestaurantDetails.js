@@ -11,9 +11,8 @@ const RestaurantDetails = () => {
   let restaurantDetails = useFetchRestaurantMenu(id);
 
   if(!restaurantDetails) return (<Shimmer />)
-
-  const {name, avgRating, cuisines, sla, cloudinaryImageId, locality, totalRatingsString} = restaurantDetails.cards[0]?.card?.card?.info;
-  const menuItems = restaurantDetails?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards;
+  const {name, avgRating, cuisines, sla, cloudinaryImageId, locality, totalRatingsString} = restaurantDetails.cards[2]?.card?.card?.info;
+  const menuItems = restaurantDetails?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards;
   const categories = menuItems.filter((c) => {
     return c.card?.card?.["@type"] === "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
   })

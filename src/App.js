@@ -2,14 +2,18 @@ import React, { StrictMode, Suspense, lazy } from 'react';
 import ReactDom from 'react-dom/client';
 import Header from './components/Header';
 import {createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
-import {BodyContainer, About, Contact, Error, RestaurantDetails } from '../utils/pageListAsync';
+import {BodyContainer, About, Contact, Error, RestaurantDetails, Cart } from '../utils/pageListAsync';
+import { Provider } from 'react-redux';
+import appStore from '../redux/appStore';
 const App = () => {
   return (
     <StrictMode>
-      <div className='box-border font-Nunito'>
-        <Header />
-        <Outlet />
-      </div>
+      <Provider store={appStore}>
+        <div className='box-border font-Nunito'>
+          <Header />
+          <Outlet />
+        </div>
+      </Provider>
     </StrictMode>
   )
 }
@@ -34,6 +38,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/restaurant/:id",
         element: <RestaurantDetails />
+      },
+      {
+        path: "/cart",
+        element: <Cart />
       }
     ],
     errorElement: <Error />

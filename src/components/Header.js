@@ -2,12 +2,13 @@ import { useState } from "react";
 import { LOGO_URL } from "../../utils/constant";
 import { Link } from "react-router-dom";
 import useInternetStatusFinder from "../../utils/useInternetStatusFinder";
-
+import { UseSelector, useSelector } from "react-redux";
 
 const Header = () => {
   const [loginBtn, setLoginBtn] = useState("Login")
   const online = useInternetStatusFinder();
-
+  const cartItems = useSelector((store) => store.cart.cartItems);
+  
   const handleLogin = () => {
     loginBtn === "Login" ? setLoginBtn("Logout") : setLoginBtn("Login")
   }
@@ -30,8 +31,8 @@ const Header = () => {
           <li>
             <Link to="/contact">Contact Us</Link>
           </li>
-          <li>
-            <Link to="/cart">Cart</Link>
+          <li className="font-bold">
+            <Link to="/cart">Cart ({cartItems.length})</Link>
           </li>
           <button className="login-btn" onClick={() => handleLogin()}>
             {loginBtn}

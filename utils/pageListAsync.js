@@ -6,4 +6,6 @@ export const Contact = loadable(() => import("../src/components/Contact"), {fall
 export const BodyContainer = loadable(() => import("../src/components/Body"), {fallback: <Loading />});
 export const RestaurantDetails = loadable(() => import("../src/components/RestaurantDetails"), {fallback: <Loading />});
 export const Error = loadable(() => import("../src/components/Error"), {fallback: <Loading />});
+export const Cart = loadable(() => import("../src/components/Cart"), {fallback: <Loading />});
+
 
